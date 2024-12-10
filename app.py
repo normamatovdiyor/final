@@ -21,11 +21,11 @@ def timetable():
     try:
         # Connect to the PostgreSQL database
         conn = pg8000.connect(
-            user="my_user", 
-            password="my_password", 
+            user="postgres", 
+            password="postgres", 
             host="database-1.cr8cicwiwx39.eu-north-1.rds.amazonaws.com", 
             port=5432, 
-            database="my_database"
+            database="database-1"
         )
 
         cur = conn.cursor()
