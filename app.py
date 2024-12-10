@@ -9,7 +9,7 @@ def index():
         # Get the level from the form
         level = request.form["level"]
         return render_template("timetable.html", level=level, data=[], message="Loading timetable...")
-    
+
     return render_template("index.html")
 
 @app.route("/timetable", methods=["GET"])
@@ -21,15 +21,15 @@ def timetable():
     try:
         # Connect to the PostgreSQL database
         conn = pg8000.connect(
-            user="my_user", 
-            password="my_password", 
-            host="database-1.cr8cicwiwx39.eu-north-1.rds.amazonaws.com", 
-            port=5432, 
-            database="my_database"
+            user="postgres",
+            password="postgres",
+            host="database-1.cr8cicwiwx39.eu-north-1.rds.amazonaws.com",
+            port=5432,
+            database="postgres"
         )
 
         cur = conn.cursor()
-        query = "SELECT * FROM Timetable WHERE level = %s;"  # Query with placeholder
+        query = "SELECT * FROM timetable WHERE level = %s;"   # Query with placeholder
         cur.execute(query, (level,))
         rows = cur.fetchall()
 
@@ -46,4 +46,3 @@ def timetable():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
-
